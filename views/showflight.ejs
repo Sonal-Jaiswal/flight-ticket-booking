@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Flight</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<style type="text/css">
+			.special{
+				list-style: none;
+			}
+			img{
+				pointer-events: none;
+			}
+		</style>
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+		    	<span class="navbar-toggler-icon"></span>
+		  	</button>
+		  	<a class="navbar-brand" href=""><img src="/logo.png"></a>
+		  	<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+			 	<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+			    	<li class="nav-item active">
+			        	<a class="nav-link" href="/allflights">Back</a>
+			    	</li>
+			    </ul>
+			    <a href="/"><button class="btn btn-danger my-2 my-sm-0" type="submit">Home</button></a>
+	  		</div>
+		</nav>
+		<br>
+		<div class="container">
+			<div class="row">
+				<div class="col"></div>
+				<div class="col-6">
+					<div class="jumbotron">
+						<h4 class="display-4"><%=flight.source%><img src="/departure-lg.png"><%=flight.destination%></h4>
+						<br>
+						<p class="lead">
+							<ul class="special">
+								<li><img src="/id.png"> <strong>Flight ID: </strong><%=flight.name%> </li>
+								<li><img src="/departure-blue.png"> <strong>Departs: </strong><%=flight.dp_time%> Hrs</li>
+								<li><img src="/arrival-blue.png"> <strong>Arrives: </strong><%=flight.ar_time%> Hrs</li>
+								<% var a = flight.date%>
+								<li><img src="/calendar.png"> <strong>Date: </strong><%=a.toDateString()%> </li>
+								<li><img src="/airline.png"> <strong>Airline: </strong><%=flight.airline%> </li>
+								<li><img src="/rupee.png"> <strong>Price:</strong> INR <%=flight.price%> </li>
+							</ul>
+						</p>
+						<hr class="my-4">
+						<a  class="btn btn-warning btn-sm" href = "/allflights/<%= flight._id %>/edit"> Edit </a>
+						<form method = "POST" action = "/allflights/<%= flight._id %>?_method=DELETE" style="display: inline;">
+							<button class="btn btn-danger btn-sm">Delete</button>
+						</form>
+					</div>
+				</div>
+				<div class="col"></div>
+			</div>
+		</div>
+	</body>
+</html>

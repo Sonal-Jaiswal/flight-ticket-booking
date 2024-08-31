@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Bill</title>
+    <style>
+    .invoice-box {
+        max-width: 800px;
+        margin: auto;
+        padding: 30px;
+        border: 1px solid #eee;
+        box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+        font-size: 16px;
+        line-height: 24px;
+        font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        color: #555;
+    }
+    .invoice-box table {
+        width: 100%;
+        line-height: inherit;
+        text-align: left;
+    }
+    .invoice-box table td {
+        padding: 5px;
+        vertical-align: top;
+    }
+    .invoice-box table tr td:nth-child(2) {
+        text-align: right;
+    }
+    
+    .invoice-box table tr.top table td {
+        padding-bottom: 20px;
+    }
+    .invoice-box table tr.top table td.title {
+        font-size: 45px;
+        line-height: 45px;
+        color: #333;
+    }
+    .invoice-box table tr.information table td {
+        padding-bottom: 40px;
+    }
+    .invoice-box table tr.heading td {
+        background: #eee;
+        border-bottom: 1px solid #ddd;
+        font-weight: bold;
+    }
+    .invoice-box table tr.details td {
+        padding-bottom: 20px;
+    }
+    .invoice-box table tr.item td{
+        border-bottom: 1px solid #eee;
+    }
+    .invoice-box table tr.item.last td {
+        border-bottom: none;
+    }
+    .invoice-box table tr.total td:nth-child(2) {
+        border-top: 2px solid #eee;
+        font-weight: bold;
+    }
+    @media only screen and (max-width: 600px) {
+        .invoice-box table tr.top table td {
+            width: 100%;
+            display: block;
+            text-align: center;
+        }
+        
+        .invoice-box table tr.information table td {
+            width: 100%;
+            display: block;
+            text-align: center;
+        }
+    }
+    /** RTL **/
+    .rtl {
+        direction: rtl;
+        font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+    }
+    .rtl table {
+        text-align: right;
+    }
+    .rtl table tr td:nth-child(2) {
+        text-align: left;
+    }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="/"><img src="/logo.png"></a>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/home">Flights</a>
+                </li>
+            </ul>
+            <a href="/logout"><button class="btn btn-danger my-2 my-sm-0" type="submit">Logout</button></a>
+        </div>
+    </nav>
+	<br>
+    <div class="invoice-box">
+        <table cellpadding="0" cellspacing="0">
+            <tr class="top">
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td class="title">
+                                <img src="/logo.png">
+                            </td>
+                            
+                            <td>
+                                Ticket ID: <%= book._id%><br>
+                                <%var z = book.date%>
+                                Issued On: <%= z.toString().slice(0,16) %>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            
+            <tr class="information">
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td>
+                                Issued by:<br><br>
+                                Aviation Pvt. Ltd.<br>
+                                Raipur, CG<br>
+                            </td>
+                            
+                            <td>
+                                <%= book.full_name %><br>
+                                <%= book.username%><br>
+                                <%= book.address%><br>
+                                <%= book.city%>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            
+            <tr class="heading">
+                <td>Description</td>
+                <td>Price</td>
+            </tr>
+            
+            <tr class="item">
+                <td><%= book.quantity %> Ticket(s) for <%=flight.name%> </td>
+                <td>INR <%= Number(book.quantity * flight.price)%></td>
+            </tr>
+            
+            <tr class="item">
+                <td>Convenience Fee</td>
+                <td>INR 500</td>
+            </tr>
+            
+            <tr class="item last">
+                <td>Taxes and other charges</td>
+                <td>INR <%= Number(Math.round(0.18 * book.quantity * flight.price))%></td>
+            </tr>
+            
+            <tr class="total">
+                <td></td>
+
+                <td>Total: INR <%= (Number(book.quantity * flight.price) + Number(500) + Math.round(0.18 * book.quantity * flight.price)) %></td>
+            </tr>
+        </table>
+        <br><br>
+        <table cellpadding="0" cellspacing="0">
+            
+            <tr class="heading">
+                <td>Flight</td>
+                <td>From</td>
+                <td>To</td>
+                <td>Date</td>
+                <td>Departure</td>
+                <td>Arrival</td>
+            </tr>
+            
+            <tr class="item">
+                <td><%= flight.name%> </td>
+                <td><%=flight.source%></td>
+                <td><%=flight.destination%></td>
+                <%var d = flight.date%>
+                <td><%=d.toString().slice(0,16)%></td>
+                <td><%=flight.dp_time%> Hrs</td>
+                <td><%=flight.ar_time%> Hrs</td>
+            </tr>
+        </table>
+    </div>
+    <div class="container">
+    	<center>
+    		<small>Digitally generated and signed by <a href="/">Aviation Pvt. Ltd.</a></small>
+    	</center>
+    </div>
+    <br>
+    <div class="container">
+        <center>
+            <button id = "print" class="btn btn-primary">Print this page</button>
+            <a href="/home"><button type="button" class="btn btn-warning">Browse More Flights</button></a>
+        </center>
+    </div>
+
+    <script type="text/javascript">
+        document.querySelector('#print').addEventListener('click', ()=> {
+            window.print();
+        });
+    </script>
+</body>
+</html>

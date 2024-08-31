@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>All Flight</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link rel="shortcut icon" href="http://www.yoursite.com/your_favicon.png" type="image/x-icon" />
+		<style type="text/css">
+			img{
+				pointer-events: none;
+			}
+			a{
+				text-decoration: none;
+			}
+			.jumbotron{
+			background-color: white;
+		}
+		.price{
+			color: green;
+		}
+		</style>
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+		    	<span class="navbar-toggler-icon"></span>
+		  	</button>
+		  	<a class="navbar-brand" href="/"><img src="/logo.png"></a>
+		  	<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+			 	<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+			    	<li class="nav-item active">
+			        	<a class="nav-link" href="/allflights">Flights</a>
+			    	</li>
+			    </ul>
+			    <a href="/"><button class="btn btn-danger my-2 my-sm-0" type="submit">Home</button></a>
+	  		</div>
+		</nav>
+		<br>
+		<div class="container">
+			<div class="row">
+				<div class="col-sm"></div>
+				<div class="col-sm"><center><h1>Listed Flights</h1></center></div>
+				<div class="col-sm"></div>	
+			</div>
+			<br>
+			<div class="row">
+				<div class="col"></div>
+				<div class="col-6">
+					<table class="table jumbotron">
+						<thead>
+							<th scope="col">Route</th>
+							<th scope="col">Departs</th>
+							<th scope="col">Arrives</th>
+							<th scope="col">Price</th>
+						</thead>
+						<tbody>
+						<% flights.forEach((flight) => { %>
+						<tr>
+							<td scope="row"><a href="/allflights/<%=flight._id%>"><%=flight.source%><img src="/departure.png"> <%=flight.destination%></a></td>
+							<td><%=flight.dp_time%> Hrs</td>
+							<td><%=flight.ar_time%> Hrs</td>
+							<td><span class="badge badge-light">INR <span class="price"><%=flight.price%></span></span></td>
+						</tr>
+						<% }) %>
+						</tbody>
+					</table>
+					<a href="/allflights/new"><button class="btn btn-success btn-sm">Add New Flight</button></a>
+				</div>
+				<div class="col"></div>	
+			</div>
+		</div>	
+	</body>
+</html>

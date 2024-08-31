@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Admin Signup</title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<style type="text/css">
+		body{
+			background-image: url('https://images.unsplash.com/photo-1569154941061-e231b4725ef1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80');
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+		</style>
+	</head>
+	<body>
+		<br><br>
+		<form method="POST" action="/registeradmin">
+			<div class='container'>
+				<div class='row'>
+					<div class="col-sm"></div>
+					<div class="col-sm"><center><h1>Admin Sign Up</h1></center></div>
+					<div class="col-sm"></div>
+				</div>
+				<div class='row'>
+					<div class="col-sm"></div>
+					<div class="col-sm jumbotron">
+						<div class="form-group row">
+				    		<label for="InputEmail1">Email address</label>
+				    		<input type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" name="username" required>
+						</div>
+						<div class="form-group row">
+				    		<label for="InputPassword1">Password</label>
+				    		<input type="password" class="form-control" id="InputPassword1" name = "password" required>
+						</div>
+						<div class="form-group form-check row">
+							<center>
+								<input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+				    			<label class="form-check-label" for="exampleCheck1">I agree to Terms and Conditions</label>
+							</center>
+						</div>
+						<center><button class="btn btn-primary">Submit</button></center>
+						<center><small>Already have an account? <a href="/login">Login</a> instead.</small></center>
+					</div>
+					<div class="col-sm"></div>
+				</div>
+			</div> 
+		</form>
+	</body>
+</html>

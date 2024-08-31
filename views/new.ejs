@@ -1,0 +1,100 @@
+<!-- <form action='/allflights' method="POST">
+	<input type="text" name="flight[source]" placeholder="Source">
+	<input type="text" name="flight[destination]" placeholder="Destination">
+	<input name="flight[duration]" placeholder="Duration">
+	<input name="flight[ar_time]" placeholder="Arrival Time">
+	<input name="flight[price]" placeholder="Price in INR">
+	<button>Submit</button>
+</form>
+<a href="/">Home</a> -->
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add New Flight</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+	    	<span class="navbar-toggler-icon"></span>
+	  	</button>
+	  	<a class="navbar-brand" href="/"><img src="/logo.png"></a>
+	  	<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+		 	<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+		    	<li class="nav-item active">
+		        	<a class="nav-link" href="/allflights">Cancel</a>
+		    	</li>
+		    </ul>
+		    <a href="/"><button class="btn btn-danger my-2 my-sm-0" type="submit">Home</button></a>
+  		</div>
+	</nav>
+	<br>
+	<div class="container">
+		<div class="row">
+			<div class="col"></div>
+			<div class="col"></div>
+			<div class="col"></div>
+		</div>
+		<div class="row">
+			<div class="col"></div>
+			<div class="col">
+				<form action='/allflights' method="POST">
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<label for="name">Flight Name</label>
+							<input type="text" name="flight[name]" id="name" placeholder="Enter Flight ID" required>
+						</div>
+						<div class="form-group col-md-6">
+							<label for="airline">Airline</label>
+							<input type="text" name="flight[airline]" id="airline" required>
+						</div>
+					</div>
+					<div class="form-row">
+						<!-- <div class="form-group"> -->
+							<div class="form-group col-md-4">
+							<label for="dp">Departure</label>
+							<input name="flight[dp_time]" id="dp" placeholder="24 Hr Format" required>
+							</div>
+							<div class="form-group col-md-4">
+								<label for="ar">Arrival</label>
+								<input name="flight[ar_time]" id="ar" placeholder="24 Hr Format" required>
+							</div>
+							<div class="form-group col-md-4">
+								<label for="duration">Duration</label>
+								<input name="flight[duration]" id="duration" placeholder="in Hrs" required>
+							</div>
+						<!-- </div> -->
+					</div>
+					<div class="form-row">
+						<div class="col-4">
+							<label for="source">Source</label>
+							<input type="text" name="flight[source]" id="source" placeholder="From" required>
+						</div>
+						<div class="col-4">
+							<label for="destination">Destination</label>
+							<input type="text" name="flight[destination]" placeholder="To" id="destination" required>
+						</div>
+						<div class="col-4">
+							<label for="date">Date</label>
+							<input type="date" name="flight[date]" placeholder="MM/DD/YYYY" id="date" required>
+						</div>
+					</div>
+					<br>
+					<div class="form-row form-group">
+						<div class="col-4">
+							<label for="price">Price</label>
+							<input name="flight[price]" id="price" placeholder="in INR" required>
+						</div>
+					</div>
+					<br><br>
+					<div class="form-row form-group">
+				  		<button class="btn btn-primary btn-block">Create</button>
+					</div>
+				</form>
+			</div>
+			<div class="col"></div>
+		</div>
+	</div>
+</body>
+</html>

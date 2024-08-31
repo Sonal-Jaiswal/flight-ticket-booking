@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add New Flight</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+	    	<span class="navbar-toggler-icon"></span>
+	  	</button>
+	  	<a class="navbar-brand" href=""><img src="assets/logo.png"></a>
+	  	<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+		 	<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+		    	<li class="nav-item active">
+		        	<a class="nav-link" href="/">Flights</a>
+		    	</li>
+		    </ul>
+		    <a href="/"><button class="btn btn-danger my-2 my-sm-0" type="submit">Home</button></a>
+  		</div>
+	</nav>
+	<br>
+	<br>
+	<div class="container">
+		<div class="row">
+			<div class="col"></div>
+			<div class="col"></div>
+			<div class="col"></div>
+		</div>
+		<div class="row">
+			<div class="col"></div>
+			<div class="col">
+				<form action = "/allflights/<%= flight._id%>?_method=PUT" method="POST">
+					<div class="form-row">
+						<div class="form-group col-md-6">
+							<label for="name1">Flight Name</label>
+							<input type="text" name="flight[name]" placeholder="Name of flight" value="<%=flight.name%>" required id="name1">
+						</div>
+						<div class="form-group col-md-6">
+							<label for="airline1">Airline</label>
+							<input type="text" name="flight[airline]" placeholder="Airline" value="<%=flight.airline%>" required id="airline1">
+						</div>
+					</div>
+					<div class="form-row">
+						<!-- <div class="form-group"> -->
+							<div class="form-group col-md-4">
+							<label for="dp1">Departure</label>
+							<input name="flight[dp_time]" placeholder="Departure Time" value="<%=flight.dp_time%>" required id="dp1">
+							</div>
+							<div class="form-group col-md-4">
+								<label for="ar1">Arrival</label>
+								<input name="flight[ar_time]" placeholder="Arrival Time" value="<%=flight.ar_time%>" required id="ar1">
+							</div>
+							<div class="form-group col-md-4">
+								<label for="duration1">Duration</label>
+								<input name="flight[duration]" placeholder="Duration" value="<%=flight.duration%>" required id="duration1">
+							</div>
+						<!-- </div> -->
+					</div>
+					<div class="form-row">
+						<div class="col-md-4">
+							<label for="source1">Source</label>
+							<input type="text" name="flight[source]" placeholder="Source" value="<%=flight.source%>" required id="source1">
+						</div>
+						<div class="col-md-4">
+							<label for="destination1">Destination</label>
+							<input type="text" name="flight[destination]" placeholder="Destination" value="<%=flight.destination%>" required id="destination1">
+						</div>
+						<div class="col-md-4">
+							<label for="date1">Date</label>
+							<input type="date" name="flight[date]" placeholder="MM/DD/YYYY" id="date1" required value="<%=flight.date%>">
+						</div>
+					</div>
+					<div class="form-row form-group">
+						<div class="col-md-4">
+							<label for="price1">Price</label>
+							<input name="flight[price]" id="price1" placeholder="in INR" required value="<%=flight.price%>">
+						</div>
+					</div>
+					<br><br>
+					<div class="form-row form-group">
+				  		<button type="submit" class="btn btn-primary btn-block">Save Changes</button>
+					</div>
+				</form>
+			</div>
+			<div class="col"></div>
+		</div>
+	</div>
+</body>
+</html>

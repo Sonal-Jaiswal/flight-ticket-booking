@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Flight <%= flight.name %></title>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<style type="text/css">
+			.special{
+				list-style: none;
+			}
+			img{
+				pointer-events: none;
+			}
+			body{
+			background-image: url('https://images.unsplash.com/photo-1483450388369-9ed95738483c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80');
+			background-repeat: no-repeat;
+			background-size: cover;
+			}
+		</style>
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+		 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+		    	<span class="navbar-toggler-icon"></span>
+		  	</button>
+		  	<a class="navbar-brand" href="/"><img src="/logo.png"></a>
+		  	<div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+			 	<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+			    	<li class="nav-item active">
+			        	<a class="nav-link" href="/home">Flights</a>
+			    	</li>
+			    </ul>
+			    <a href="/logout"><button class="btn btn-danger my-2 my-sm-0" type="submit">Logout</button></a>
+	  		</div>
+		</nav>
+		<br>
+		<div class="container">
+			<div class="row">
+				<div class="col"></div>
+				<div class="col-6">
+					<div class="jumbotron">
+						<h4 class="display-4"><%=flight.source%><img src="/departure-lg.png"><%=flight.destination%></h4>
+						<br>
+						<p class="lead">
+							<ul class="special">
+								<li><img src="/id.png"> <strong>Flight ID:</strong> <%=flight.name%> </li>
+								<li><img src="/departure-blue.png"> <strong>Departure</strong> <%=flight.dp_time%> Hrs</li>
+								<li><img src="/arrival-blue.png"> <strong>Arrival:</strong> <%=flight.ar_time%> Hrs</li>
+								<% var a = flight.date%>
+								<li><img src="/calendar.png"> <strong>Date:</strong> <%=a.toDateString()%> </li>
+								<li><img src="/airline.png"> <strong>Airline:</strong> <%=flight.airline%> </li>
+								<li><img src="/rupee.png"> <strong>Price:</strong> INR <%=flight.price%> </li>
+							</ul>
+						</p>
+						<hr class="my-4">
+						<p><small>All bookings are non-refundable and subject to DGCA guidelines.</small></p>
+						<a class="btn btn-success btn-md" href="/home/<%= flight._id %>/book" role="button">Book Now</a>
+					</div>
+				</div>
+				<div class="col"></div>
+			</div>
+		</div>
+	</body>
+</html>
