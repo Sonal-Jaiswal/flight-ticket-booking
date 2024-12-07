@@ -15,9 +15,9 @@ var user = require("./models/user.js"),
   admin = require("./models/admin.js"),
   booking = require("./models/booking.js");
 
-//Connecting Database
+//Connecting Database //   LSa81bnSxg4ZRXFB
 mongoose
-  .connect(process.env.DB_URI, {
+  .connect("mongodb+srv://vsonaljaiswal:LSa81bnSxg4ZRXFB@cluster0.ymxdp.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,
@@ -220,7 +220,8 @@ function isLoggedIn(req, res, next) {
 }
 
 //Listen Route
-var port = process.env.PORT || 3000;
+// var port = process.env.PORT || 3000;
+var port = 3000;
 app.listen(port, () => {
   console.log(`Web app is running on http://localhost:${port}`);
 });
