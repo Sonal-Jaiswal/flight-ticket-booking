@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>All Flight</title>
+		<title>All Flights</title>
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<style type="text/css">
@@ -22,6 +22,12 @@
 		.price{
 			color: green;
 		}
+		.search-container {
+			background-color: rgba(255, 255, 255, 0.95);
+			border-radius: 10px;
+			padding: 20px;
+			margin-bottom: 20px;
+		}
 		</style>
 	</head>
 	<body>
@@ -35,42 +41,111 @@
 			    	<li class="nav-item active">
 			        	<a class="nav-link" href="/home">Flights</a>
 			    	</li>
+			    	<li class="nav-item">
+			        	<a class="nav-link" href="/my-bookings">My Bookings</a>
+			    	</li>
 			    </ul>
+			    <span class="navbar-text mr-3">
+			    	Welcome, <%= currentUser.username %>!
+			    </span>
 			    <a href="/logout"><button class="btn btn-danger my-2 my-sm-0" type="submit">Logout</button></a>
 	  		</div>
 		</nav>
 		<br>
 		<div class="container">
+			<!-- Flash Messages -->
+			<% if(error && error.length > 0) { %>
+				<div class="alert alert-danger alert-dismissible fade show" role="alert">
+					<%= error %>
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+			<% } %>
+			<% if(success && success.length > 0) { %>
+				<div class="alert alert-success alert-dismissible fade show" role="alert">
+					<%= success %>
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+			<% } %>
+
 			<div class="row">
 				<div class="col-sm"></div>
 				<div class="col-sm"><center><h1>Available Flights</h1></center></div>
 				<div class="col-sm"></div>	
 			</div>
 			<br>
+
+			<!-- Search Form -->
+			<div class="search-container">
+				<form method="GET" action="/home" class="row">
+					<div class="col-md-3">
+						<input type="text" class="form-control" name="source" placeholder="From" value="<%= searchQuery ? searchQuery.source : '' %>">
+					</div>
+					<div class="col-md-3">
+						<input type="text" class="form-control" name="destination" placeholder="To" value="<%= searchQuery ? searchQuery.destination : '' %>">
+					</div>
+					<div class="col-md-3">
+						<input type="date" class="form-control" name="date" value="<%= searchQuery ? searchQuery.date : '' %>">
+					</div>
+					<div class="col-md-3">
+						<button type="submit" class="btn btn-primary">Search</button>
+						<a href="/home" class="btn btn-secondary">Clear</a>
+					</div>
+				</form>
+			</div>
+
 			<div class="row">
 				<div class="col"></div>
-				<div class="col-6">
-					<table class="table jumbotron">
-						<thead>
-							<th scope="col">Route</th>
-							<th scope="col">Departs</th>
-							<th scope="col">Arrives</th>
-							<th scope="col">Price</th>
-						</thead>
-						<tbody>
-						<% flights.forEach((flight) => { %>
-						<tr>
-							<td scope="row"><a href="/home/<%=flight._id%>"><%=flight.source%><img src="./departure.png"> <%=flight.destination%></a></td>
-							<td><%=flight.dp_time%> Hrs</td>
-							<td><%=flight.ar_time%> Hrs</td>
-							<td><span class="badge badge-light">INR <span class="price"><%=flight.price%></span></span></td>
-						</tr>
-						<% }) %>
-						</tbody>
-					</table>
+				<div class="col-10">
+					<% if(flights && flights.length > 0) { %>
+						<table class="table jumbotron">
+							<thead class="thead-dark">
+								<th scope="col">Route</th>
+								<th scope="col">Airline</th>
+								<th scope="col">Date</th>
+								<th scope="col">Departs</th>
+								<th scope="col">Arrives</th>
+								<th scope="col">Duration</th>
+								<th scope="col">Price</th>
+								<th scope="col">Action</th>
+							</thead>
+							<tbody>
+							<% flights.forEach((flight) => { %>
+							<tr>
+								<td scope="row">
+									<a href="/home/<%=flight._id%>">
+										<%=flight.source%><img src="./departure.png" width="20"> <%=flight.destination%>
+									</a>
+								</td>
+								<td><%=flight.airline%></td>
+								<td><%=flight.date.toLocaleDateString()%></td>
+								<td><%=flight.dp_time%>:00 Hrs</td>
+								<td><%=flight.ar_time%>:00 Hrs</td>
+								<td><%=flight.duration%> hrs</td>
+								<td><span class="badge badge-light">INR <span class="price"><%=flight.price%></span></span></td>
+								<td>
+									<a href="/home/<%=flight._id%>/book" class="btn btn-success btn-sm">Book Now</a>
+								</td>
+							</tr>
+							<% }) %>
+							</tbody>
+						</table>
+					<% } else { %>
+						<div class="jumbotron text-center">
+							<h3>No flights found</h3>
+							<p>Try adjusting your search criteria or check back later for new flights.</p>
+						</div>
+					<% } %>
 				</div>
 				<div class="col"></div>	
 			</div>
 		</div>	
+
+		<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	</body>
 </html>
