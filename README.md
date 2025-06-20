@@ -2,6 +2,10 @@
 
 A comprehensive web application for booking flight tickets with both admin and client functionality. Built with Node.js, Express, MongoDB, and EJS templating.
 
+##Screenshot
+![landing page](./public/ss1.png)
+![ticket](./public/ss2.png)
+
 ## Features
 
 ### User Features
